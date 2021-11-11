@@ -13,9 +13,16 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link href="../css/styles.css" rel="stylesheet">
+    <style>
+        .imback{
+            background-image: url("../images/fon2.jpg");
+            padding-bottom: 5px;
+            padding-top: 5px;
+        }
+    </style>
 </head>
 <body>
-<header style="background-color: #4B7F7E">
+<header class="imback">
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="${pageContext.request.contextPath}/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
@@ -24,10 +31,10 @@
 
             <ul class="nav nav-tabs">
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/home" class="nav-link text-white" aria-current="page">Главная</a></li>
-                <li class="nav-item"><a href="#" class="nav-link text-white">Посты</a></li>
-                <li class="nav-item"><a href="#" class="nav-link text-white">Товары</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/products" class="nav-link text-white">Товары</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/registration" class="nav-link active" style="color: #4B7F7E">Регистрация</a></li>
                 <li class="nav-item"><a href="${pageContext.request.contextPath}/signIn" class="nav-link text-white">Вход</a></li>
+                <li class="nav-item"><a href="${pageContext.request.contextPath}/profile" class="nav-link text-white">Профиль</a></li>
             </ul>
         </header>
     </div>

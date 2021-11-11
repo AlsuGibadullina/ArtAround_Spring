@@ -1,20 +1,20 @@
 package ru.kpfu.itis.form;
 
 public class LoginForm {
-    private String nickname;
+    private String email;
     private String password;
 
-    public LoginForm(String nickname, String password) {
-        this.nickname = nickname;
+    public LoginForm(String email, String password) {
+        this.email = email;
         this.password = password;
     }
 
     public String getLogin() {
-        return nickname;
+        return email;
     }
 
-    public void setLogin(String nickname) {
-        this.nickname = nickname;
+    public void setLogin(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

@@ -13,7 +13,7 @@ public class UsersRepositoryImpl implements UsersRepository {
     //language=sql
     private final String SQL_INSERT_USER = "INSERT INTO users(nickname, email, passwordhash) VALUES (?, ?, ?)";
 
-    private final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE nickname=?";
+    private final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE email=?";
 
     public UsersRepositoryImpl(Connection connection) {
         this.connection = connection;
@@ -55,19 +55,19 @@ public class UsersRepositoryImpl implements UsersRepository {
     }
 
     @Override
-    public User findByLogin(String nickname) {
+    public User findByLogin(String email) {
         ResultSet resultSet = null;
         User user = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
-            preparedStatement.setString(1, nickname);
+            preparedStatement.setString(1, email);
 
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 user = new User();
                 user.setId(resultSet.getLong("id"));
                 user.setNickname(resultSet.getString("nickname"));
-                user.setPasswordHash(resultSet.getString("password_hash"));
+                user.setPasswordHash(resultSet.getString("passwordhash"));
                 user.setEmail(resultSet.getString("email"));
             }
         } catch (SQLException throwables) {

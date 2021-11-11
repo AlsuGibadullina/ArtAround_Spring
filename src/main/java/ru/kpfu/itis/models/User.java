@@ -1,11 +1,31 @@
 package ru.kpfu.itis.models;
 
+import java.util.List;
+
 public class User {
 
     private Long id;
     private String nickname;
     private String email;
     private String passwordHash;
+    List<Product> favorites;
+    List<Product> purchases;
+
+    public List<Product> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(List<Product> favorites) {
+        this.favorites = favorites;
+    }
+
+    public List<Product> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Product> purchases) {
+        this.purchases = purchases;
+    }
 
     @Override
     public String toString() {
