@@ -1,26 +1,10 @@
 package ru.kpfu.itis.servlets;
 
-import ru.kpfu.itis.models.Product;
-import ru.kpfu.itis.models.User;
-import ru.kpfu.itis.repositories.*;
-import ru.kpfu.itis.services.*;
-
-import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet("/products")
+//@WebServlet("/products")
 public class ProductsServlet extends HttpServlet {
-
+    /*
     private UsersService usersService;
     private ProductsService productsService;
 
@@ -38,7 +22,7 @@ public class ProductsServlet extends HttpServlet {
             UsersRepository usersRepository = new UsersRepositoryImpl(connection);
             AuthRepository authRepository = new AuthRepositoryImpl(connection);
             usersService = new UsersServiceImpl(usersRepository, authRepository);
-            ProductsRepository productsRepository = new ProductsRepositoryImpl(connection);
+            ProductsRepository productsRepository = new ProductsRepositoryImpl1(connection);
             productsService = new ProductsServiceImpl(productsRepository);
         } catch (SQLException e) {
             System.out.println("Unavailable");
@@ -84,4 +68,6 @@ public class ProductsServlet extends HttpServlet {
 
         req.getRequestDispatcher("/jsp/products.jsp").forward(req, resp);
     }
+
+     */
 }

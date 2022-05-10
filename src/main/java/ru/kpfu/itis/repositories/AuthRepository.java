@@ -1,8 +1,11 @@
 package ru.kpfu.itis.repositories;
 
-import ru.kpfu.itis.models.Auth;
+import org.springframework.data.repository.CrudRepository;
+import ru.kpfu.itis.models.entities.Auth;
 
-public interface AuthRepository extends CrudRepository<Auth> {
-    Auth findByCookieValue(String cookieValue);
-    Auth save(Auth auth);
+import java.util.Optional;
+
+public interface AuthRepository extends CrudRepository<Auth, Long> {
+
+    Optional<Auth> findByCookieValue(String cookieValue);
 }

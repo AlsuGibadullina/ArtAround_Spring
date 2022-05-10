@@ -1,26 +1,10 @@
 package ru.kpfu.itis.servlets;
 
-import ru.kpfu.itis.models.Post;
-import ru.kpfu.itis.repositories.*;
-import ru.kpfu.itis.services.PostsService;
-import ru.kpfu.itis.services.PostsServiceImpl;
-import ru.kpfu.itis.services.UsersService;
-import ru.kpfu.itis.services.UsersServiceImpl;
-
-import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet("/home")
+//@WebServlet("/home")
 public class PostsServlet extends HttpServlet {
+    /*
 
     private UsersService usersService;
     private PostsService postsService;
@@ -64,4 +48,6 @@ public class PostsServlet extends HttpServlet {
         super.doPost(req, resp);
     }
 
+
+     */
 }

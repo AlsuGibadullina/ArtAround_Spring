@@ -1,78 +1,123 @@
 package ru.kpfu.itis.repositories;
 
-import ru.kpfu.itis.models.User;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import ru.kpfu.itis.models.entities.User;
 
-import java.sql.*;
-import java.util.List;
+import java.sql.PreparedStatement;
 import java.util.Optional;
 
 public class UsersRepositoryImpl implements UsersRepository {
 
-    private Connection connection;
+    private JdbcTemplate jdbcTemplate;
+
+    private RowMapper<User> userRowMapper = ((resultSet, rowNum) -> {
+        return User.builder()
+                .id(resultSet.getLong("id"))
+                .nickname(resultSet.getString("nickname"))
+                .email(resultSet.getString("email"))
+                .passwordHash(resultSet.getString("passwordHash"))
+                .build();
+    });
 
     //language=sql
-    private final String SQL_INSERT_USER = "INSERT INTO users(nickname, email, passwordhash) VALUES (?, ?, ?)";
+    private final String SQL_INSERT = "INSERT INTO users(nickname, email, passwordhash) VALUES (?, ?, ?)";
+    private final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?;";
+    private final String SQL_FIND_USER_BY_EMAIL = "SELECT * FROM users WHERE email=?;";
 
-    private final String SQL_FIND_USER_BY_LOGIN = "SELECT * FROM users WHERE email=?";
-
-    public UsersRepositoryImpl(Connection connection) {
-        this.connection = connection;
+    public UsersRepositoryImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
-    public List<User> findAll() {
+    public <S extends User> S save(S user) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement statement = connection.prepareStatement(SQL_INSERT, new String[]{"id"});
+            statement.setString(1, user.getNickname());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getPasswordHash());
+
+            return statement;
+        }, keyHolder);
+
+        user.setId(keyHolder.getKey().longValue());
+         return user;
+    }
+
+    @Override
+    public <S extends User> Iterable<S> saveAll(Iterable<S> entities) {
         return null;
     }
 
     @Override
     public Optional<User> findById(Long id) {
-        return Optional.empty();
-    }
-
-    @Override
-    public User save(User user) {
-        ResultSet resultSet = null;
+        User user;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_INSERT_USER, Statement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, user.getNickname());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, user.getPasswordHash());
-
-            resultSet = preparedStatement.executeQuery();
-
-            if (resultSet.next()) {
-                user.setId(resultSet.getLong("id"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            user = jdbcTemplate.queryForObject(SQL_FIND_USER_BY_ID, userRowMapper, id);
+        } catch (DataAccessException ex) {
+            return Optional.empty();
         }
-        return user;
+        return Optional.of(user);
     }
 
     @Override
-    public void deleteById(Long id) {
-
-    }
-
-    @Override
-    public User findByLogin(String email) {
-        ResultSet resultSet = null;
-        User user = null;
+    public Optional<User> findByEmail(String email) {
+        User user;
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SQL_FIND_USER_BY_LOGIN);
-            preparedStatement.setString(1, email);
-
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                user = new User();
-                user.setId(resultSet.getLong("id"));
-                user.setNickname(resultSet.getString("nickname"));
-                user.setPasswordHash(resultSet.getString("passwordhash"));
-                user.setEmail(resultSet.getString("email"));
-            }
-        } catch (SQLException throwables) {
-            //
+            user = jdbcTemplate.queryForObject(SQL_FIND_USER_BY_EMAIL, userRowMapper, email);
+        }catch (DataAccessException ex){
+            return Optional.empty();
         }
-        return user;
+        return Optional.of(user);
+    }
+
+    @Override
+    public boolean existsById(Long aLong) {
+        return false;
+    }
+
+    @Override
+    public Iterable<User> findAll() {
+        return null;
+    }
+
+    @Override
+    public Iterable<User> findAllById(Iterable<Long> longs) {
+        return null;
+    }
+
+    @Override
+    public long count() {
+        return 0;
+    }
+
+    @Override
+    public void deleteById(Long aLong) {
+
+    }
+
+    @Override
+    public void delete(User entity) {
+
+    }
+
+    @Override
+    public void deleteAllById(Iterable<? extends Long> longs) {
+
+    }
+
+    @Override
+    public void deleteAll(Iterable<? extends User> entities) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
     }
 }

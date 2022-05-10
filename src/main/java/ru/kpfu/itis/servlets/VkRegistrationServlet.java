@@ -1,35 +1,10 @@
 package ru.kpfu.itis.servlets;
 
-import com.google.gson.Gson;
-import com.vk.api.sdk.client.Lang;
-import com.vk.api.sdk.client.TransportClient;
-import com.vk.api.sdk.client.VkApiClient;
-import com.vk.api.sdk.client.actors.UserActor;
-import com.vk.api.sdk.exceptions.ApiException;
-import com.vk.api.sdk.exceptions.ClientException;
-import com.vk.api.sdk.httpclient.HttpTransportClient;
-import com.vk.api.sdk.objects.UserAuthResponse;
-import com.vk.api.sdk.objects.users.UserXtrCounters;
-import ru.kpfu.itis.form.UserForm;
-import ru.kpfu.itis.repositories.UsersRepository;
-import ru.kpfu.itis.repositories.UsersRepositoryImpl;
-import ru.kpfu.itis.services.UsersService;
-import ru.kpfu.itis.services.UsersServiceImpl;
-
-import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
-@WebServlet("/vk")
+//@WebServlet("/vk")
 public class VkRegistrationServlet extends HttpServlet {
-
+/*
     private UsersService usersService;
 
     private final String URL = "jdbc:postgresql://localhost:5432/maven";
@@ -42,7 +17,7 @@ public class VkRegistrationServlet extends HttpServlet {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
-            UsersRepository usersRepository = new UsersRepositoryImpl(connection);
+            UsersRepository usersRepository = new UsersRepositoryImpl1(connection);
             usersService = new UsersServiceImpl(usersRepository);
         } catch (SQLException | ClassNotFoundException e) {
             throw new UnavailableException("Сайт недоступен!!!");
@@ -90,11 +65,13 @@ public class VkRegistrationServlet extends HttpServlet {
             e.printStackTrace();
         } catch (ApiException e) {
             e.printStackTrace();
-        }*/
-    }
+        }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
+
+ */
+
 }

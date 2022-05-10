@@ -1,9 +1,9 @@
 package ru.kpfu.itis.services;
 
-import ru.kpfu.itis.models.Product;
+import ru.kpfu.itis.models.entities.Product;
 import ru.kpfu.itis.repositories.ProductsRepository;
 
-import java.util.List;
+import java.util.Optional;
 
 public class ProductsServiceImpl implements ProductsService {
 
@@ -24,17 +24,17 @@ public class ProductsServiceImpl implements ProductsService {
     }
 
     @Override
-    public List<Product> findAll() {
+    public Iterable<Product> findAll() {
         return productsRepository.findAll();
     }
 
     @Override
-    public List<Product> findFavoritesByUserId(Long userId) {
+    public Optional<Object> findFavoritesByUserId(Long userId) {
         return productsRepository.findFavoritesByUserId(userId);
     }
 
     @Override
-    public List<Product> findPurchasesByUserId(Long userId) {
+    public Optional<Object> findPurchasesByUserId(Long userId) {
         return productsRepository.findPurchasesByUserId(userId);
     }
 

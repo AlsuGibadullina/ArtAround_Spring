@@ -1,9 +1,7 @@
 package ru.kpfu.itis.services;
 
-import ru.kpfu.itis.models.Post;
+import ru.kpfu.itis.models.entities.Post;
 import ru.kpfu.itis.repositories.PostsRepository;
-
-import java.util.List;
 
 public class PostsServiceImpl implements PostsService{
 
@@ -14,7 +12,7 @@ public class PostsServiceImpl implements PostsService{
     }
 
     @Override
-    public List<Post> findAll() {
+    public Iterable<Post> findAll() {
         return postsRepository.findAll();
     }
 }

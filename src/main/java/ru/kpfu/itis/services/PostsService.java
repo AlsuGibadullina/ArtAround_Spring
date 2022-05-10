@@ -1,9 +1,7 @@
 package ru.kpfu.itis.services;
 
-import ru.kpfu.itis.models.Post;
-
-import java.util.List;
+import ru.kpfu.itis.models.entities.Post;
 
 public interface PostsService {
-    List<Post> findAll();
+    Iterable<Post> findAll();
 }

@@ -1,32 +1,10 @@
 package ru.kpfu.itis.servlets;
 
-import ru.kpfu.itis.models.User;
-import ru.kpfu.itis.repositories.AuthRepository;
-import ru.kpfu.itis.repositories.AuthRepositoryImpl;
-import ru.kpfu.itis.repositories.UsersRepository;
-import ru.kpfu.itis.repositories.UsersRepositoryImpl;
-import ru.kpfu.itis.services.UsersService;
-import ru.kpfu.itis.services.UsersServiceImpl;
-
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.UnavailableException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
-@WebServlet("/profile")
+//@WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
-
+    /*
     private UsersService usersService;
 
     @Override
@@ -70,4 +48,6 @@ public class ProfileServlet extends HttpServlet {
             throw new UnavailableException("Сайт недоступен!!!");
         }
     }
+
+     */
 }

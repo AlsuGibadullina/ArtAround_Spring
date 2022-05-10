@@ -1,26 +1,10 @@
 package ru.kpfu.itis.servlets;
 
-import ru.kpfu.itis.models.Product;
-import ru.kpfu.itis.models.User;
-import ru.kpfu.itis.repositories.*;
-import ru.kpfu.itis.services.*;
-
-import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.List;
 
-@WebServlet("/favorites")
+//@WebServlet("/favorites")
 public class FavoritesServlet extends HttpServlet {
-    private UsersService usersService;
+    /*private UsersService usersService;
     private ProductsService productsService;
 
     private final String DB_URL = "jdbc:postgresql://localhost:5432/maven";
@@ -37,7 +21,7 @@ public class FavoritesServlet extends HttpServlet {
             UsersRepository usersRepository = new UsersRepositoryImpl(connection);
             AuthRepository authRepository = new AuthRepositoryImpl(connection);
             usersService = new UsersServiceImpl(usersRepository, authRepository);
-            ProductsRepository productsRepository = new ProductsRepositoryImpl(connection);
+            ProductsRepository productsRepository = new ProductsRepositoryImpl1(connection);
             productsService = new ProductsServiceImpl(productsRepository);
         } catch (SQLException e) {
             System.out.println("Unavailable");
@@ -82,4 +66,6 @@ public class FavoritesServlet extends HttpServlet {
             }
         }
     }
+
+     */
 }

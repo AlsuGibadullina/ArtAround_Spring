@@ -1,7 +1,11 @@
 package ru.kpfu.itis.repositories;
 
-import ru.kpfu.itis.models.User;
+import org.springframework.data.repository.CrudRepository;
+import ru.kpfu.itis.models.entities.User;
 
-public interface UsersRepository extends CrudRepository<User> {
-    User findByLogin(String login);
+import java.util.Optional;
+
+public interface UsersRepository extends CrudRepository<User, Long> {
+
+    Optional<User> findByEmail(String email);
 }

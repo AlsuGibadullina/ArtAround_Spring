@@ -1,9 +1,8 @@
 package ru.kpfu.itis.services;
 
-import ru.kpfu.itis.models.Product;
+import ru.kpfu.itis.models.entities.Product;
 
-import javax.servlet.http.Cookie;
-import java.util.List;
+import java.util.Optional;
 
 public interface ProductsService {
 
@@ -15,10 +14,10 @@ public interface ProductsService {
 
     public void removeFromFavorites(Long userId, Long productId);
 
-    List<Product> findAll();
+    Iterable<Product> findAll();
 
-    List<Product> findFavoritesByUserId(Long userId);
+    Optional<Object> findFavoritesByUserId(Long userId);
 
-    List<Product> findPurchasesByUserId(Long userId);
+    Optional<Object> findPurchasesByUserId(Long userId);
 
 }

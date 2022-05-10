@@ -1,28 +1,10 @@
 package ru.kpfu.itis.servlets;
 
-import ru.kpfu.itis.form.UserForm;
-import ru.kpfu.itis.models.User;
-import ru.kpfu.itis.repositories.UsersRepository;
-import ru.kpfu.itis.repositories.UsersRepositoryImpl;
-import ru.kpfu.itis.services.UsersService;
-import ru.kpfu.itis.services.UsersServiceImpl;
-
-import javax.servlet.ServletException;
-import javax.servlet.UnavailableException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.UUID;
 
-@WebServlet("/registration")
+//@WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
-
+/*
     private UsersService usersService;
 
     @Override
@@ -35,7 +17,7 @@ public class RegistrationServlet extends HttpServlet {
             String DB_PASSWORD = "sadafa54ga";
             Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
-            UsersRepository usersRepository = new UsersRepositoryImpl(connection);
+            UsersRepository usersRepository = new UsersRepositoryImpl1(connection);
             usersService = new UsersServiceImpl(usersRepository);
         } catch (SQLException e) {
             System.out.println("Unavailable");
@@ -108,4 +90,6 @@ public class RegistrationServlet extends HttpServlet {
 
         request.getRequestDispatcher("jsp/registration.jsp").forward(request, response);
     }
+
+ */
 }

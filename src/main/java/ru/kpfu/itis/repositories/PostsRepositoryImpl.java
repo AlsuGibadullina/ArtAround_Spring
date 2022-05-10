@@ -1,67 +1,111 @@
 package ru.kpfu.itis.repositories;
 
-import ru.kpfu.itis.mapper.RowMapper;
-import ru.kpfu.itis.models.Post;
-import ru.kpfu.itis.models.Product;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import ru.kpfu.itis.models.entities.Post;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
-public class PostsRepositoryImpl implements PostsRepository{
+public class PostsRepositoryImpl implements PostsRepository {
 
-    private final String FIND_ALL = "SELECT * FROM posts;";
-    private Connection connection;
-    private TagsRepository tagsRepository;
+    @Autowired
+    public JdbcTemplate jdbcTemplate;
 
-    public PostsRepositoryImpl(Connection connection) {
-        this.connection = connection;
+    private RowMapper<Post> rowMapper = ((resultSet, rowNum) -> {
+        return Post.builder()
+                .id(resultSet.getLong("id"))
+                .title(resultSet.getString("title"))
+                .text(resultSet.getString("photo"))
+                .tag(resultSet.getString("tag"))
+                .build();
+    });
+
+    //language=sql
+    private final String SQL_INSERT_POST = "INSERT INTO posts (title, text, photo, tag) VALUE ?, ?, ?, ?";
+    private final String SQL_FIND_ALL = "SELECT * FROM posts";
+
+    @Override
+    public <S extends Post> S save(S entity) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        jdbcTemplate.update(connection -> {
+            PreparedStatement statement = connection.prepareStatement(SQL_INSERT_POST, new String[]{"id"});
+
+            statement.setString(1, entity.getTitle());
+            statement.setString(2, entity.getText());
+            statement.setString(3, entity.getPhoto());
+            statement.setString(4, entity.getTag());
+
+            return statement;
+        }, keyHolder);
+        entity.setId(keyHolder.getKey().longValue());
+        return entity;
     }
 
     @Override
-    public List findAll() {
-        ResultSet resultSet = null;
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(FIND_ALL);
-            resultSet = preparedStatement.executeQuery();
-            List<Post> posts = rowMapPosts.rowMap(resultSet);
-            return posts;
-        } catch (SQLException e) {
-
-        }
+    public <S extends Post> Iterable<S> saveAll(Iterable<S> entities) {
         return null;
     }
 
     @Override
-    public Optional findById(Long id) {
+    public Optional<Post> findById(Long aLong) {
         return Optional.empty();
     }
 
     @Override
-    public Object save(Object o) {
+    public boolean existsById(Long aLong) {
+        return false;
+    }
+
+    @Override
+    public Iterable<Post> findAll() {
+        Iterable<Post> posts;
+        try {
+            posts = jdbcTemplate.query(SQL_FIND_ALL, rowMapper);
+        } catch (DataAccessException ex) {
+            return new ArrayList<>();
+        }
+        return posts;
+    }
+
+    @Override
+    public Iterable findAllById(Iterable iterable) {
         return null;
     }
 
     @Override
-    public void deleteById(Long id) {
+    public long count() {
+        return 0;
+    }
+
+    @Override
+    public void deleteById(Long aLong) {
 
     }
 
-    private RowMapper<List<Post>> rowMapPosts = ((resultSet) -> {
-        List<Post> posts = new ArrayList<>();
-        while (resultSet.next()) {
-            Post post = new Post();
-            post.setId(resultSet.getLong("id"));
-            post.setTitle(resultSet.getString("title"));
-            post.setText(resultSet.getString("text"));
-            post.setPhoto(resultSet.getString("photo"));
-            post.setTag(resultSet.getString("tag"));
-            posts.add(post);
-        }
-        return posts;
-    });
+    @Override
+    public void delete(Post entity) {
+
+    }
+
+    @Override
+    public void deleteAllById(Iterable iterable) {
+
+    }
+
+    @Override
+    public void deleteAll(Iterable entities) {
+
+    }
+
+    @Override
+    public void deleteAll() {
+
+    }
 }

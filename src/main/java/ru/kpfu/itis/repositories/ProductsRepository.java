@@ -1,13 +1,14 @@
 package ru.kpfu.itis.repositories;
 
-import ru.kpfu.itis.models.Product;
+import org.springframework.data.repository.CrudRepository;
+import ru.kpfu.itis.models.entities.Product;
 
-import java.util.List;
+import java.util.Optional;
 
-public interface ProductsRepository extends CrudRepository<Product> {
-    List<Product> findFavoritesByUserId(Long userId);
+public interface ProductsRepository extends CrudRepository<Product, Long> {
+    Optional<Object> findFavoritesByUserId(Long userId);
 
-    List<Product> findPurchasesByUserId(Long userId);
+    Optional<Object> findPurchasesByUserId(Long userId);
 
     public void addToPurchases(Long userId, Long productId);
 
